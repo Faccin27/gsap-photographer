@@ -6,6 +6,7 @@ import CategoriesSection from "@/components/sections/categories-section"
 import GallerySection from "@/components/sections/gallery-section"
 import HeroSection from "@/components/sections/hero-section"
 import PanoramaSection from "@/components/sections/panorama-section"
+import SocialSection from "@/components/sections/social-section"
 
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
         <AboutSection />
         <PanoramaSection />
         <GallerySection />
+        <SocialSection />
     </MainLayout>
   )
 }
