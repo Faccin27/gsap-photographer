@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📸 GSAP-Photographer – Site Profissional para Fotógrafa
 
-## Getting Started
+Site institucional fictício desenvolvido para **Cristina Duarte**, uma fotógrafa profissional. Com foco em estética visual, fluidez nas animações e navegação moderna, o projeto explora ao máximo as capacidades do **GSAP** para criar uma experiência envolvente, suave e impactante.
 
-First, run the development server:
+🔗 **Site em produção**: [https://gsap-photographer.vercel.app/](https://gsap-photographer.vercel.app/)
+
+## 📸 Screenshots
+
+| Hero                                     | Categorias                                 |
+| ---------------------------------------- | ------------------------------------------ |
+| ![Hero](/public/images/screenshot1.png)  | ![Categorias](/public/images/screenshot2.png) |
+
+| About                                    | Panorama 360°                              |
+| ---------------------------------------- | ------------------------------------------- |
+| ![About](/public/images/screenshot3.png) | ![Panorama](/public/images/screenshot4.png) |
+
+| Gallery                                  | Social Media                               |
+| ---------------------------------------- | ------------------------------------------- |
+| ![Gallery](/public/images/screenshot5.png) | ![Social](/public/images/screenshot6.png) |
+
+## 🚀 Tecnologias Utilizadas
+
+* **[Next.js 14.2.28](https://nextjs.org/)** – Framework React com foco em performance, renderização otimizada e escalabilidade.
+* **[GSAP 3.13.0](https://greensock.com/gsap/)** – Biblioteca de animações robusta utilizada em todo o projeto.
+* **[Photo Sphere Viewer 4.8.1](https://photo-sphere-viewer.js.org/)** – Visualização imersiva em 360° para a seção Panorama.
+* **[Tailwind CSS 3.4.1](https://tailwindcss.com/)** – Estilização moderna e responsiva via classes utilitárias.
+* **TypeScript** – Tipagem estática para maior segurança e produtividade.
+
+## 📂 Estrutura do Projeto
 
 ```bash
+.
+├── public/
+│   └── images/            # Assets estáticos e fotos
+├── src/
+│   ├── app/               # Páginas da aplicação
+│   ├── components/        # Componentes reutilizáveis
+│   │   └── sections/      # Seções como Hero, About, Gallery etc.
+│   ├── utils/             # Configurações e helpers (ex: animações GSAP)
+│   └──lib/                # Libs auxiliares e configs adicionais
+└── README.md
+````
+
+## 🧪 Como Rodar o Projeto
+
+```bash
+# Clone o repositório
+git clone https://github.com/Faccin27/gsap-photographer
+cd gsap-photographer
+
+# Instale as dependências
+npm install
+
+# Rode o projeto
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📦 Build para Produção
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O projeto está atualmente hospedado na **Vercel**, garantindo performance de alto nível e integração contínua com deploy automático.
 
-## Learn More
+## 📱 Responsividade
 
-To learn more about Next.js, take a look at the following resources:
+O site é 100% **responsivo**, adaptando-se perfeitamente a diferentes dispositivos e tamanhos de tela, com foco em **fluidez visual e usabilidade**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔐 Licença
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Este projeto é **propriedade intelectual de seu autor** e está disponível **exclusivamente para fins de estudo e leitura de código**.
+**Não é permitido** o uso, modificação, redistribuição ou comercialização deste código sem autorização expressa do autor.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
