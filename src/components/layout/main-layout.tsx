@@ -41,7 +41,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   }, [])
 
   return (
-    <main className="overflow-x-hidden bg-black text-white">
+    <main className="overflow-x-hidden bg-[#00000080] text-white">
       <CustomCursor mousePosition={mousePosition} />
       {children}
     </main>
