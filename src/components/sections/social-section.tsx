@@ -78,7 +78,7 @@ export default function SocialSection() {
 
         <div className="flex flex-wrap justify-center gap-8">
           {socialLinks.map((social, index) => (
-            <Link key={index} href={social.url} className="social-item group opacity-100">
+            <Link key={index} href={social.url} target="_blank" rel="noopener noreferrer" className="social-item group opacity-100">
               <div
                 className="w-24 h-24 flex items-center justify-center rounded-2xl text-white shadow-lg transform transition-all duration-300 group-hover:rotate-6 group-hover:scale-110 border border-white/20 backdrop-blur-sm"
                 style={{
