@@ -1,18 +1,23 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { gsap } from "gsap"
+import { useEffect, useRef } from "react"
 
 interface CustomCursorProps {
-  mousePosition: { x: number; y: number }
+  mousePosition: {
+    x: number
+    y: number
+  }
 }
 
 export default function CustomCursor({ mousePosition }: CustomCursorProps) {
   const cursorRef = useRef<HTMLDivElement>(null)
   const cursorDotRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
-    if (cursorRef.current && cursorDotRef.current) {
+    if (cursorRef.current && cursorDotRef.current && !isMobile) {
       // smooth effect
       gsap.to(cursorRef.current, {
         x: mousePosition.x,
@@ -29,7 +34,9 @@ export default function CustomCursor({ mousePosition }: CustomCursorProps) {
         ease: "power1.out",
       })
     }
-  }, [mousePosition])
+  }, [mousePosition, isMobile])
+
+  if (isMobile) return null
 
   return (
     <>
