@@ -1,32 +1,32 @@
-"use client";
+"use client"
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import AbstractBackground from "@/components/ui/abstract-background";
-import SectionHeading from "@/components/ui/section-heading";
+import { useEffect, useRef } from "react"
+import Image from "next/image"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import AbstractBackground from "@/components/ui/abstract-background"
+import SectionHeading from "@/components/ui/section-heading"
 
 export default function CategoriesSection() {
-  const categoriesRef = useRef(null);
-  const horizontalRef = useRef(null);
-  const sectionsRef = useRef<HTMLElement[]>([]);
+  const categoriesRef = useRef(null)
+  const horizontalRef = useRef(null)
+  const sectionsRef = useRef<HTMLElement[]>([])
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger)
 
     // Horizontal scroll for categories
     if (horizontalRef.current && categoriesRef.current) {
-      const sections = sectionsRef.current;
-      const container = horizontalRef.current;
+      const sections = sectionsRef.current
+      const container = horizontalRef.current
 
       // Calculate total width of all sections
       const totalWidth = sections.reduce((width, section: HTMLElement) => {
-        return width + section.offsetWidth;
-      }, 0);
+        return width + section.offsetWidth
+      }, 0)
 
       // Set the width in container
-      gsap.set(container, { width: totalWidth });
+      gsap.set(container, { width: totalWidth })
 
       // Create the horizontal scroll animation
       gsap.to(container, {
@@ -41,19 +41,20 @@ export default function CategoriesSection() {
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
-      });
+      })
     }
 
     // Cleanup function
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
+
   const addToRefs = (el: HTMLElement | null) => {
     if (el && !sectionsRef.current.includes(el)) {
-      sectionsRef.current.push(el);
+      sectionsRef.current.push(el)
     }
-  };
+  }
 
   const categories = [
     {
@@ -84,14 +85,10 @@ export default function CategoriesSection() {
       description:
         "Cada pessoa tem uma história única para contar. Meus retratos capturam a essência e a personalidade de cada indivíduo, criando imagens autênticas e emocionantes.",
     },
-  ];
+  ]
 
   return (
-    <section
-      id="especialidades"
-      ref={categoriesRef}
-      className="bg-black py-20 overflow-hidden"
-    >
+    <section id="especialidades" ref={categoriesRef} className="bg-black py-20 overflow-hidden">
       {/* Abstract background with lines */}
       <AbstractBackground pattern="waves" />
 
@@ -108,30 +105,30 @@ export default function CategoriesSection() {
             <div
               key={category.id}
               ref={addToRefs}
-              className="min-w-[100vw] h-[70vh] flex flex-col items-center justify-center px-10"
+              className="min-w-[100vw] h-[70vh] flex flex-col items-center justify-center px-4 sm:px-10"
             >
-              <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10">
-                <div className="w-full md:w-1/2 relative h-[50vh] overflow-hidden rounded-2xl group">
+              <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                <div className="w-full md:w-1/2 relative h-[30vh] md:h-[50vh] overflow-hidden rounded-2xl group">
                   <Image
-                    src={category.image}
-                    alt={`Fotografia de ${category.title}`} 
+                    src={category.image || "/placeholder.svg"}
+                    alt={`Fotografia de ${category.title}`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-black/30 opacity-80"></div>
-                  <div className="absolute bottom-0 left-0 p-8 text-white">
+                  <div className="absolute bottom-0 left-0 p-4 md:p-8 text-white">
                     <span className="inline-block px-3 py-1 bg-purple-500 text-white text-sm font-medium rounded-full mb-3">
                       {category.id}
                     </span>
                   </div>
                 </div>
                 <div className="w-full md:w-1/2">
-                  <h3 className="text-5xl font-bold mb-6 tracking-tight text-white">
+                  <h3 className="text-3xl md:text-5xl font-bold mb-3 md:mb-6 tracking-tight text-white">
                     {category.title}
                   </h3>
-                  <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                    {category.description}
-                  </p>
+                  <div className="h-[20vh] md:h-auto overflow-y-auto md:overflow-visible pr-2 custom-scrollbar">
+                    <p className="text-gray-300 text-base md:text-lg mb-6 leading-relaxed">{category.description}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -139,5 +136,5 @@ export default function CategoriesSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }
