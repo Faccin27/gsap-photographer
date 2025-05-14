@@ -4,6 +4,8 @@ import { type ReactNode, useEffect, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import CustomCursor from "@/components/ui/custom-cursor"
+import SmoothScroll from "@/components/ui/smooth-scroll"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 interface MainLayoutProps {
   children: ReactNode
@@ -11,6 +13,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -34,8 +37,13 @@ export default function MainLayout({ children }: MainLayoutProps) {
       stagger: 0.2,
     })
 
-    
+    // Force ScrollTrigger refresh after a short delay to ensure proper initialization
+    const refreshTimeout = setTimeout(() => {
+      ScrollTrigger.refresh(true)
+    }, 200)
+
     return () => {
+      clearTimeout(refreshTimeout)
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     }
   }, [])
@@ -43,7 +51,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <main className="overflow-x-hidden bg-[#00000080] text-white">
       <CustomCursor mousePosition={mousePosition} />
-      {children}
+      {isMobile ? children : <SmoothScroll>{children}</SmoothScroll>}
     </main>
   )
 }

@@ -23,6 +23,38 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body.smooth-scroll {
+  overflow: hidden;
+  height: 100%;
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+}
+
+/* Smooth scroll wrapper and content styles */
+.smooth-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.smooth-content {
+  width: 100%;
+  min-height: 100vh;
+  will-change: transform;
+}
+
+/* Improve smooth scrolling performance */
+.smooth-content {
+  width: 100%;
+  min-height: 100vh;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
 /* Hide default cursor on links and buttons */
 a,
 button,
@@ -99,6 +131,14 @@ button,
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
+
+/* Add these styles to fix the categories header */
+.categories-header {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .text-shadow {

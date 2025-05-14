@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ScrollSmoother } from "gsap/ScrollSmoother"
 import AbstractBackground from "@/components/ui/abstract-background"
 import SectionHeading from "@/components/ui/section-heading"
 
@@ -13,7 +14,16 @@ export default function CategoriesSection() {
   const sectionsRef = useRef<HTMLElement[]>([])
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+
+    // Get the smoother instance if it exists
+    const smoother = ScrollSmoother.get()
+
+    // If smoother exists, tell it to ignore this section completely
+    if (smoother && categoriesRef.current) {
+      // This prevents ScrollSmoother from affecting this section
+      smoother.effects(categoriesRef.current, { speed: 0 })
+    }
 
     // Horizontal scroll for categories
     if (horizontalRef.current && categoriesRef.current) {
@@ -21,17 +31,15 @@ export default function CategoriesSection() {
       const container = horizontalRef.current
 
       // Calculate total width of all sections
-      const totalWidth = sections.reduce((width, section: HTMLElement) => {
+      const totalWidth = sections.reduce((width, section) => {
         return width + section.offsetWidth
       }, 0)
 
       // Set the width in container
       gsap.set(container, { width: totalWidth })
 
-      // Create the horizontal scroll animation
-      gsap.to(container, {
-        x: () => -(totalWidth - window.innerWidth),
-        ease: "none",
+      // Create the horizontal scroll animation with a separate timeline
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: categoriesRef.current,
           start: "top top",
@@ -42,11 +50,26 @@ export default function CategoriesSection() {
           invalidateOnRefresh: true,
         },
       })
+
+      // Add the horizontal movement to the timeline
+      tl.to(container, {
+        x: () => -(totalWidth - window.innerWidth),
+        ease: "none",
+        duration: 1,
+      })
+
+      return () => {
+        // Clean up
+        tl.scrollTrigger?.kill()
+      }
     }
 
-    // Cleanup function
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.trigger === categoriesRef.current) {
+          trigger.kill()
+        }
+      })
     }
   }, [])
 
@@ -93,10 +116,12 @@ export default function CategoriesSection() {
       <AbstractBackground pattern="waves" />
 
       <div className="container mx-auto px-4 mb-12 relative z-10">
-        <SectionHeading
-          title="Especialidades"
-          subtitle="Explore os diversos estilos e categorias de fotografia que ofereço"
-        />
+        <div className="categories-header">
+          <SectionHeading
+            title="Especialidades"
+            subtitle="Explore os diversos estilos e categorias de fotografia que ofereço"
+          />
+        </div>
       </div>
 
       <div className="relative overflow-hidden">
