@@ -79,8 +79,8 @@ export default function PanoramaSection() {
               ))}
             </ul>
 
-            <Button href="/visualizacao-360" variant="outline">
-              Explorar Visualizações 360°
+            <Button href="https://wa.me/5549999215720" variant="outline">
+              Crie ja a sua experiencia 360°
             </Button>
           </div>
 
