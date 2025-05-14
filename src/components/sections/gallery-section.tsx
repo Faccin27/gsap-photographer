@@ -84,7 +84,7 @@ export default function GallerySection() {
 
   return (
     <section
-      ref={galleryRef}
+      ref={galleryRef} id="gallery"
       className="py-20 bg-gradient-to-b from-black to-gray-900 relative"
     >
       <AbstractBackground pattern="diagonal" />
