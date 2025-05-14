@@ -131,7 +131,7 @@ export default function GallerySection() {
                   <Link
                     href={`/projeto/${item.id}`}
                     key={item.id}
-                    className="gallery-item group relative overflow-hidden rounded-xl opacity-100"
+                    className="gallery-item group relative overflow-hidden rounded-xl opacity-100 py-6"
                   >
                   <span className="px-6 py-3 bg-white/10 backdrop-blur-md text-white font-medium rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 border border-white/20">
                     Ver Projeto
