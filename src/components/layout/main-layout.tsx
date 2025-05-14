@@ -32,7 +32,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
     // Animate abstract lines for backgrounds
     gsap.to(".abstract-line", {
       strokeDashoffset: 0,
-      duration: 2,
+      duration: 4,
       ease: "power2.inOut",
       stagger: 0.2,
     })

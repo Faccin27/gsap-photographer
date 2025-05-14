@@ -1,20 +1,21 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import Image from "next/image"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import AbstractBackground from "@/components/ui/abstract-background"
-import SectionHeading from "@/components/ui/section-heading"
-import Button from "@/components/ui/button"
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AbstractBackground from "@/components/ui/abstract-background";
+import SectionHeading from "@/components/ui/section-heading";
+import Button from "@/components/ui/button";
+import Link from "next/link";
 
 export default function GallerySection() {
-  const galleryRef = useRef(null)
+  const galleryRef = useRef(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(ScrollTrigger);
 
-    gsap.set(".gallery-item", { opacity: 1 })
+    gsap.set(".gallery-item", { opacity: 1 });
 
     if (galleryRef.current) {
       gsap.fromTo(
@@ -31,16 +32,16 @@ export default function GallerySection() {
             start: "top 80%",
           },
           onComplete: () => {
-            gsap.set(".gallery-item", { clearProps: "all" })
+            gsap.set(".gallery-item", { clearProps: "all" });
           },
-        },
-      )
+        }
+      );
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
-  }, [])
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   const galleryItems = [
     {
@@ -79,18 +80,27 @@ export default function GallerySection() {
       type: "Paisagem",
       image: "/images/paisagem.jpg",
     },
-  ]
+  ];
 
   return (
-    <section ref={galleryRef} className="py-20 bg-gradient-to-b from-black to-gray-900 relative">
+    <section
+      ref={galleryRef}
+      className="py-20 bg-gradient-to-b from-black to-gray-900 relative"
+    >
       <AbstractBackground pattern="diagonal" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <SectionHeading title="Galeria" subtitle="Uma seleção dos meus melhores trabalhos" />
+        <SectionHeading
+          title="Galeria"
+          subtitle="Uma seleção dos meus melhores trabalhos"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {galleryItems.map((item) => (
-            <div key={item.id} className="gallery-item group relative overflow-hidden rounded-xl opacity-100">
+            <div
+              key={item.id}
+              className="gallery-item group relative overflow-hidden rounded-xl opacity-100"
+            >
               <div className="relative h-96 overflow-hidden">
                 <Image
                   src={item.image || "/placeholder.svg"}
@@ -108,7 +118,9 @@ export default function GallerySection() {
                     <span className="inline-block px-3 py-1 bg-purple-500/80 text-white text-xs font-medium rounded-full mb-2">
                       {item.type}
                     </span>
-                    <h3 className="text-xl font-bold text-white mb-1 text-shadow">{item.title}</h3>
+                    <h3 className="text-xl font-bold text-white mb-1 text-shadow">
+                      {item.title}
+                    </h3>
                     <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       ID: {item.id} • Clique para ver mais detalhes
                     </p>
@@ -116,9 +128,15 @@ export default function GallerySection() {
                 </div>
 
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Link
+                    href={`/projeto/${item.id}`}
+                    key={item.id}
+                    className="gallery-item group relative overflow-hidden rounded-xl opacity-100"
+                  >
                   <span className="px-6 py-3 bg-white/10 backdrop-blur-md text-white font-medium rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 border border-white/20">
                     Ver Projeto
                   </span>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -132,5 +150,5 @@ export default function GallerySection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
